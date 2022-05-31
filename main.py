@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request,  render_template
 from config import config
 from models import db, Bache
 import folium
+from folium.plugins import MarkerCluster
 
 def create_app(enviroment):
     app = Flask(__name__)
@@ -67,6 +68,7 @@ def mapa():
         location=[-25.302058396540463, -57.58112871603071],
         zoom_start=13,
         )
+    cluster= MarkerCluster().add_to(map)
     lista_baches =Bache.query.all()
     extraccion = []
     for datos in lista_baches:
@@ -80,6 +82,6 @@ def mapa():
             location=mark,
             popup=f">b<{point[2]}</b>",
             tooltip="bache!"
-        ).add_to(map)
+        ).add_to(cluster)
     return map._repr_html_()
 
