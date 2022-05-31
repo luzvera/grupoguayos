@@ -52,32 +52,46 @@ css" rel= "stylesheet">
     </div>
   </div>
 
-  <div class="grid grid-cols-5 gap-8">
+  <form class="grid grid-cols-5 gap-8" action="/api/v1/baches/" method="POST">
     <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-5">
-      <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Nombre de usuario</label>
-      <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Juan Perez">
+      <label for="nombre_usuario" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Nombre de usuario</label>
+      <input type="text" name="nombre_usuario" id="nombre_usuario" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Juan Perez">
     </div>
 
     <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-2">
-      <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Dirección</label>
-      <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Avda. General Santos">
+      <label for="direccion" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Dirección</label>
+      <input type="text" name="direccion" id="direccion" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Avda. General Santos">
     </div>
 
     <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Foto</label>
-      <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Adjuntá la foto del bache">
+      <label for="foto" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Foto</label>
+      <input type="text" name="foto" id="foto" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Adjuntá la foto del bache">
     </div>
 
     <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Categoría</label>
-      <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Bache con agua">
+      <label for="categoria" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Categoría</label>
+      <input type="text" name="categoria" id="categoria" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Bache con agua">
     </div>
 
     <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Nickname</label>
-      <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="¡Poneme un nombre! Ej.: Mi pozito">
+      <label for="nombre_bache" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Nickname</label>
+      <input type="text" name="nombre_bache" id="nombre_bache" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="¡Poneme un nombre! Ej.: Mi pozito">
     </div>
-  </div>
+
+
+    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
+      <label for="latitud" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Latitud</label>
+      <input type="text" name="latitud" id="latitud" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Bache con agua">
+    </div>
+
+    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
+      <label for="longitud" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Longitud</label>
+      <input type="text" name="longitud" id="longitud" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="¡Poneme un nombre! Ej.: Mi pozito">
+    </div>
+
+
+    <input type="submit" value="Guardar">
+  </form>
 
     <!-- mapa de ubicaciones -->
           
