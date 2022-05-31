@@ -6,7 +6,7 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.
 css" rel= "stylesheet">
 <!-- favicon en pestaña -->
-<link rel="icon" type="image/x-icon" href="./icoon.png">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icoon.png') }}">
 <!-- titulo en pestaña -->
 <title>Bachenuncia</title>
 </head>
@@ -20,7 +20,7 @@ css" rel= "stylesheet">
       <div class="flex items-center">
         <a href="#">
           <span class="sr-only">Workflow</span>
-          <img class="h-16 w-auto" src="logobache.png" alt="">
+          <img class="h-32 w-auto" src="{{ url_for('static', filename='logobache.png') }}" alt="">
         </a>
         <div class="hidden ml-10 space-x-8 lg:block">
           <a href="#denuncia" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Denunciá </a>
@@ -87,7 +87,7 @@ css" rel= "stylesheet">
                 <h2 class="text-base font-semibold text-indigo-600 tracking-wide uppercase"></h2>
                 <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Mapa de baches:</p>
                 <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Un paseo por los baches de nuestro país.</p>
-                <img src="google-maps.jpg"
+                <img src="{{ url_for('static', filename='google-maps.jpg') }}"
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@ css" rel= "stylesheet">
   <div class="h-80 w-full absolute bottom-0 xl:inset-0 xl:h-full">
     <div class="h-full w-full xl:grid xl:grid-cols-2">
       <div class="h-full xl:relative xl:col-start-2">
-        <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="baches.jpg" alt="Baches en paraguay">
+        <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="{{ url_for('static', filename='baches.jpg') }}" alt="Baches en paraguay">
         <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"></div>
       </div>
     </div>
