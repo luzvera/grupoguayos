@@ -11,16 +11,16 @@ css" rel= "stylesheet">
 <title>Bachenuncia</title>
 </head>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
   <!-- Barra e icons -->
 <header class="sticky top-0 z-50 w-full">
   <nav class="relative bg-white mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-    <div class="w-full py-6 flex items-center justify-between">
+    <div class="w-full py-6 sm:py-0 flex items-center justify-between">
       <div class="flex items-center">
         <a href="#">
           <span class="sr-only">Workflow</span>
-          <img class="h-32 w-auto" src="{{ url_for('static', filename='logobache.png') }}" alt="">
+          <img class="h-24 w-auto" src="{{ url_for('static', filename='logobache.png') }}" alt="">
         </a>
         <div class="hidden ml-10 space-x-8 lg:block">
           <a href="#denuncia" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Denunciá </a>
@@ -101,7 +101,10 @@ css" rel= "stylesheet">
                 <h2 class="text-base font-semibold text-indigo-600 tracking-wide uppercase"></h2>
                 <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Mapa de baches:</p>
                 <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Un paseo por los baches de nuestro país.</p>
-                <img src="{{ url_for('static', filename='google-maps.jpg') }}"
+                <iframe src="/mapa" scrolling ="no" class="w-full h-80"
+        frameborder="0"></iframe>
+      
+
               </div>
             </div>
           </div>

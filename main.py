@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request,  render_template
 from config import config
 from models import db, Bache
+import folium
 
 def create_app(enviroment):
     app = Flask(__name__)
@@ -59,5 +60,26 @@ def delete_bache(id):
 
     return jsonify({'bache': bache.json() })
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/mapa')
+def mapa():
+    #Inicializamos el mapa 
+    map= folium.Map(
+        location=[-25.302058396540463, -57.58112871603071],
+        zoom_start=13,
+        )
+    lista_baches =Bache.query.all()
+    extraccion = []
+    for datos in lista_baches:
+        extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache])
+
+    for point in extraccion:
+        mark= point[0],point[1]
+        print(point)
+        # # point(i)
+        folium.Marker(
+            location=mark,
+            popup=f">b<{point[2]}</b>",
+            tooltip="bache!"
+        ).add_to(map)
+    return map._repr_html_()
+
