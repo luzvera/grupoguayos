@@ -1,329 +1,614 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.
-css" rel= "stylesheet">
-<!-- favicon en pestaña -->
-<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icoon.png') }}">
-<!-- titulo en pestaña -->
-<title>Bachenuncia</title>
-</head>
-</head>
-<body class="overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.
+css"
+      rel="stylesheet"
+    />
+    <!-- favicon en pestaña -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='icoon.png') }}"
+    />
+    <!-- titulo en pestaña -->
+    <title>Bachenuncia</title>
+    <style>
+      body::-webkit-scrollbar {
+        display: none;
+      }
 
-  <!-- Barra e icons -->
-<header class="sticky top-0 z-30 w-full">
-  <nav class="relative bg-white mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-    <div class="w-full py-6 sm:py-0 flex items-center justify-between">
-      <div class="flex items-center">
-        <a href="#">
-          <span class="sr-only">Workflow</span>
-          <img class="h-24 w-auto" src="{{ url_for('static', filename='logobache.png') }}" alt="">
-        </a>
-        <div class="hidden ml-10 space-x-8 lg:block">
-          <a href="#denuncia" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Denunciá </a>
+      /* Hide scrollbar for IE, Edge and Firefox */
+      body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- Barra e icons -->
+    <header class="sticky top-0 z-30 w-full">
+      <nav
+        class="relative bg-white mx-auto px-4 sm:px-6 lg:px-8"
+        aria-label="Top"
+      >
+        <div class="w-full py-6 sm:py-0 flex items-center justify-between">
+          <div class="flex items-center mx-auto sm:ml-0">
+            <a href="#">
+              <span class="sr-only">Workflow</span>
+              <img
+                class="h-24 w-auto"
+                src="{{ url_for('static', filename='logobache.png') }}"
+                alt=""
+              />
+            </a>
+            <div class="hidden ml-10 space-x-8 lg:block">
+              <a
+                href="#denuncia"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+              >
+                Denunciá
+              </a>
 
-          <a href="#mapa" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Ubicaciones </a>
+              <a
+                href="#mapa"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+              >
+                Ubicaciones
+              </a>
 
-          <a href="#estadisticas" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Estadisticas </a>
+              <a
+                href="#estadisticas"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+              >
+                Estadísticas
+              </a>
 
-          <a href="#conocenos" class="text-base font-medium text-blue-900 hover:text-indigo-50"> Conocenos </a>
+              <a
+                href="#conocenos"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+              >
+                Conocenos
+              </a>
 
-          <a href="#porque" class="text-base font-medium text-blue-900 hover:text-indigo-50">¿Por qué lo hacemos?</a>
+              <a
+                href="#porque"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+                >¿Por qué lo hacemos?</a
+              >
 
+              <a
+                href="#info"
+                class="text-base font-medium text-blue-900 hover:text-indigo-50"
+                >Informate</a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mensaje principal---- -->
+
+    <div class="bg-white" id="denuncia">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+          ></h2>
+          <p
+            class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+          >
+            Denunciá tu bache
+          </p>
+          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+            Buscamos crear denuncias colectivas para mejorar la calidad de rutas
+            en nuestro país. Ingresá tu bache acá:
+          </p>
         </div>
       </div>
     </div>
-  </nav>
-</header>
 
-  <!-- Mensaje principal---- -->
+    <!-- Primera parte formulario---- -->
 
-<div class="bg-white" id="denuncia">
-
-    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-base font-semibold text-indigo-600 tracking-wide uppercase"></h2>
-        <p class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Denunciá tu bache</p>
-        <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Buscamos crear denuncias colectivas para mejorar la calidad de rutas en nuestro país. Ingresá tu bache acá:</p>
+    <form
+      class="grid grid-cols-1 gap-4 pl-3 sm:grid-cols-4"
+      action="/api/v1/baches/"
+      method="POST"
+    >
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-2"
+      >
+        <label
+          for="nombre_usuario"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Nombre de usuario</label
+        >
+        <input
+          type="text"
+          name="nombre_usuario"
+          id="nombre_usuario"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="Ejemplo: Juan Perez"
+        />
       </div>
-    </div>
-  </div>
 
-  <!-- Primera parte formulario---- -->
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-2"
+      >
+        <label
+          for="direccion"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Dirección</label
+        >
+        <input
+          type="text"
+          name="direccion"
+          id="direccion"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="Ejemplo: Avda. General Santos"
+        />
+      </div>
 
-  <form class="grid grid-cols-4 gap-4" action="/api/v1/baches/" method="POST">
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-5">
-      <label for="nombre_usuario" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Nombre de usuario</label>
-      <input type="text" name="nombre_usuario" id="nombre_usuario" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Juan Perez">
-    </div>
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1"
+      >
+        <label
+          for="foto"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Foto</label
+        >
+        <input
+          type="text"
+          name="foto"
+          id="foto"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="Adjuntá la foto del bache"
+        />
+      </div>
 
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-2">
-      <label for="direccion" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Dirección</label>
-      <input type="text" name="direccion" id="direccion" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Avda. General Santos">
-    </div>
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1"
+      >
+        <label
+          for="categoria"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Categoría</label
+        >
+        <select name="categoria" id="categoria">
+          <optgroup label="Baches con agua"></optgroup>
+          <option value="Bachecito">Bachecito</option>
+          <option value="Bachemar">Bachemar</option>
+          <option value="Aquabache">Aquabache</option>
+          <option value="Bachelor">Bachelor</option>
+          <option value="Bacheton">Bacheton</option>
+          <optgroup label="Baches seco"></optgroup>
+          <option value="Bachardo">Bachardo</option>
+          <option value="Bacheto">Bacheto</option>
+          <option value="Bacheinfierno">Bacheinfierno</option>
+          <option value="Bachero">Bachero</option>
+          <option value="Bachenato">Bachenato</option>
+        </select>
+        <!-- <input type="text" name="categoria" id="categoria" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Bache con agua"> -->
+      </div>
 
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="foto" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Foto</label>
-      <input type="text" name="foto" id="foto" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Adjuntá la foto del bache">
-    </div>
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1"
+      >
+        <label
+          for="nombre_bache"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Nickname</label
+        >
+        <input
+          type="text"
+          name="nombre_bache"
+          id="nombre_bache"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="¡Poneme un nombre! Ej.: Mi pozito"
+        />
+      </div>
 
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="categoria" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Categoría</label>
-      <select name="categoria" id="categoria">
-      <optgroup label="Baches con agua"></optgroup>
-      <option value="Bachecito">Bachecito</option>
-      <option value="Bachemar">Bachemar</option>
-      <option value="Aquabache">Aquabache</option>
-      <option value="Bachelor">Bachelor</option>
-      <option value="Bacheton">Bacheton</option>
-      <optgroup label="Baches seco"></optgroup>
-      <option value="Bachardo">Bachardo</option>
-      <option value="Bacheto">Bacheto</option>
-      <option value="Bacheinfierno">Bacheinfierno</option>
-      <option value="Bachero">Bachero</option>
-      <option value="Bachenato">Bachenato</option>
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1"
+      >
+        <label
+          for="latitud"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Latitud</label
+        >
+        <input
+          type="text"
+          name="latitud"
+          id="latitud"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="Datos de latitud"
+        />
+      </div>
 
-      </select>
-      <!-- <input type="text" name="categoria" id="categoria" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Ejemplo: Bache con agua"> -->
-    </div>
+      <div
+        class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1"
+      >
+        <label
+          for="longitud"
+          class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
+          >Longitud</label
+        >
+        <input
+          type="text"
+          name="longitud"
+          id="longitud"
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+          placeholder="Datos de longitud"
+        />
+      </div>
 
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="nombre_bache" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Nickname</label>
-      <input type="text" name="nombre_bache" id="nombre_bache" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="¡Poneme un nombre! Ej.: Mi pozito">
-    </div>
+      <!-- boton Guardar -->
 
-
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="latitud" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Latitud</label>
-      <input type="text" name="latitud" id="latitud" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Datos de latitud">
-    </div>
-
-    <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 w-60 ml-1">
-      <label for="longitud" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900">Longitud</label>
-      <input type="text" name="longitud" id="longitud" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Datos de longitud">
-    </div>
-
-    <!-- boton Guardar -->
-
-    <button type="submit" class="inline-flex items-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-60">Guardar</button>
-  </form>
+      <button
+        type="submit"
+        class="inline-flex items-center px-2 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-60 text-center"
+      >
+        Guardar
+      </button>
+    </form>
 
     <!-- mapa de ubicaciones -->
-          
-          <div class="bg-white" id="mapa">
-            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-              <div class="text-center">
-                <h2 class="text-base font-semibold text-indigo-600 tracking-wide uppercase"></h2>
-                <p class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Mapa de baches:</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Un paseo por los baches de nuestro país.</p>
-                <iframe src="/mapa" scrolling ="no" class="w-full h-80"
-        frameborder="0"></iframe>
-      
 
-              </div>
-            </div>
+    <div class="bg-white" id="mapa">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+          ></h2>
+          <p
+            class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+          >
+            Mapa de baches:
+          </p>
+          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+            Un paseo por los baches de nuestro país.
+          </p>
+          <iframe
+            src="/mapa"
+            scrolling="no"
+            class="w-full h-80"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- estadisticas  -->
+    <div class="relative bg-gray-900" id="estadisticas">
+      <div class="h-80 w-full absolute bottom-0 xl:inset-0 xl:h-full">
+        <div class="h-full w-full xl:grid xl:grid-cols-2">
+          <div class="h-full xl:relative xl:col-start-2">
+            <img
+              class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0"
+              src="{{ url_for('static', filename='baches.jpg') }}"
+              alt="Baches en paraguay"
+            />
+            <div
+              aria-hidden="true"
+              class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8"
+      >
+        <div
+          class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24"
+        >
+          <h2
+            class="text-sm font-semibold text-indigo-300 tracking-wide uppercase"
+          >
+            Baches en paraguay
+          </h2>
+          <p class="mt-3 text-3xl font-extrabold text-white">
+            +80% de la población paraguaya
+          </p>
+          <p class="mt-5 text-lg text-gray-300">
+            se encuentra con baches en su tránsito diario, los mismos generan
+            pérdidas para el usuario, problemas ambientales y de salubridad, así
+            como problemas para los automovilistas y peatones en general.
+          </p>
+          <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
+            <p>
+              <span class="block text-2xl font-bold text-white">57%</span>
+              <span class="mt-1 block text-base text-gray-300"
+                ><span class="font-medium text-white">De usuarios</span>
+                utilizan un automóvil como medio de transporte diario.</span
+              >
+            </p>
+
+            <p>
+              <span class="block text-2xl font-bold text-white">60%</span>
+              <span class="mt-1 block text-base text-gray-300"
+                ><span class="font-medium text-white">Utiliza</span> medios de
+                tranporte alternativos (como uber y bolt) siendo de igual manera
+                afectados por los desperfectos de las calles.</span
+              >
+            </p>
+
+            <p>
+              <span class="block text-2xl font-bold text-white">57%</span>
+              <span class="mt-1 block text-base text-gray-300"
+                ><span class="font-medium text-white">Fueron afectados</span> de
+                forma material por incovenientes en las calles de nuestro
+                país.</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- nuestro team con fotos -->
+    <div class="bg-white" id="conocenos">
+      <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+          <div class="space-y-5 sm:space-y-4">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Nuestro equipo:
+            </h2>
           </div>
 
-<!-- estadisticas  -->
-<div class="relative bg-gray-900" id="estadisticas">
-  <div class="h-80 w-full absolute bottom-0 xl:inset-0 xl:h-full">
-    <div class="h-full w-full xl:grid xl:grid-cols-2">
-      <div class="h-full xl:relative xl:col-start-2">
-        <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="{{ url_for('static', filename='baches.jpg') }}" alt="Baches en paraguay">
-        <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"></div>
-      </div>
-    </div>
-  </div>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8">
-    <div class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24">
-      <h2 class="text-sm font-semibold text-indigo-300 tracking-wide uppercase">Baches en paraguay</h2>
-      <p class="mt-3 text-3xl font-extrabold text-white">+80% de la población paraguaya</p>
-      <p class="mt-5 text-lg text-gray-300">se encuentra con baches en su tránsito diario, los mismos generan pérdidas para el usuario, problemas ambientales y de salubridad, así como problemas para los automovilistas y peatones en general.</p>
-      <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
-        <p>
-          <span class="block text-2xl font-bold text-white">57%</span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">De usuarios</span> utilizan un automóvil como medio de transporte diario.</span>
-        </p>
-
-        <p>
-          <span class="block text-2xl font-bold text-white">60%</span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Utiliza</span> medios de tranporte alternativos (como uber y bolt) siendo de igual manera afectados por los desperfectos de las calles.</span>
-        </p>
-
-        <p>
-          <span class="block text-2xl font-bold text-white">57%</span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Fueron afectados</span> de forma material por incovenientes en las calles de nuestro país.</span>
-        </p>
-
-      </div>
-    </div>
-  </div>
-</div>
-    
-<!-- nuestro team con fotos -->
-          <div class="bg-white" id="conocenos">
-            <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
-              <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
-                <div class="space-y-5 sm:space-y-4">
-                  <p class="text-xl text-gray-500">. 
-                  <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Nuestro equipo:</h2></p>
+          <div class="lg:col-span-2">
+            <ul
+              role="list"
+              class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8"
+            >
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{url_for('static', filename= 'majo.jpg')}}"
+                    alt="Maria Jose sonriendo."
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Maria José Ramirez</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
                 </div>
-        
-                <div class="lg:col-span-2">
-                  <ul role="list" class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
-                    <li>
-                      <div class="flex items-center space-x-4 lg:space-x-6">
-                        <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{url_for('static', filename= 'majo.jpg')}}" alt="Maria Jose sonriendo.">
-                        <div class="font-medium text-lg leading-6 space-y-1">
-                          <h3>Maria José Ramirez</h3>
-                          <p class="text-blue-900">Co/Founder
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center space-x-4 lg:space-x-6">
-                        <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{ url_for('static', filename= 'luz.jpg') }}" alt="Luz sonriendo.">
-                        <div class="font-medium text-lg leading-6 space-y-1">
-                          <h3>Luz Vera</h3>
-                          <p class="text-blue-900">Co/Founder
-                        </div>
-                      </div>
-                    </li>
-          
-                  </li>
-                  <li>
-                    <div class="flex items-center space-x-4 lg:space-x-6">
-                      <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{ url_for('static', filename= 'diana.jpeg') }}" alt="">
-                      <div class="font-medium text-lg leading-6 space-y-1">
-                        <h3>Diana Vázquez</h3>
-                        <p class="text-blue-900">Co/Founder
-                      </div>
-                    </div>
-                    </li>
-          
-                  </li>
-                  <li>
-                    <div class="flex items-center space-x-4 lg:space-x-6">
-                      <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{ url_for('static', filename= 'martin.jpeg') }}" alt="">
-                      <div class="font-medium text-lg leading-6 space-y-1">
-                        <h3>Martín Fernandez</h3>
-                        <p class="text-blue-900">Co/Founder
-                      </div>
-                    </div>
-                    </li>
-          
-                  </li>
-                  <li>
-                    <div class="flex items-center space-x-4 lg:space-x-6">
-                      <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{ url_for('static', filename= 'adol.jpeg') }}" alt="">
-                      <div class="font-medium text-lg leading-6 space-y-1">
-                        <h3>Adolfina Alfonso</h3>
-                        <p class="text-blue-900">Co/Founder
-                      </div>
-                    </div>
-                    </li>
-          
-                  </li>
-                  <li>
-                    <div class="flex items-center space-x-4 lg:space-x-6">
-                      <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="{{ url_for('static', filename= 'luz.jpg') }}" alt="">
-                      <div class="font-medium text-lg leading-6 space-y-1">
-                        <h3>Evelyn Gayozo</h3>
-                        <p class="text-blue-900">Co/Founder
-                      </div>
-                    </div>
-                    </li>
-        </ul>
+              </li>
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{ url_for('static', filename= 'luz.jpg') }}"
+                    alt="Luz sonriendo."
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Luz Vera</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{ url_for('static', filename= 'diana.jpeg') }}"
+                    alt=""
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Diana Vázquez</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{ url_for('static', filename= 'martin.jpeg') }}"
+                    alt=""
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Martín Fernandez</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{ url_for('static', filename= 'adol.jpeg') }}"
+                    alt=""
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Adolfina Alfonso</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex items-center space-x-4 lg:space-x-6">
+                  <img
+                    class="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                    src="{{ url_for('static', filename= 'luz.jpg') }}"
+                    alt=""
+                  />
+                  <div class="font-medium text-lg leading-6 space-y-1">
+                    <h3>Evelyn Gayozo</h3>
+                    <p class="text-blue-900">Co/Founder</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- por que lo hacemos -->
+    <!-- por que lo hacemos -->
 
-<div class="bg-white" id="porque">
-  <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h2 class="text-base font-semibold text-indigo-600 tracking-wide uppercase"></h2>
-      <p class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl">¿Por qué lo hacemos?</p>
-      <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Como ciudadanos estamos al tanto del calamitoso estado de varias calles de nuestro país, en este caso enfocandonos en los baches que no son solucionados por parte de los municipios, son varias las calles de la capital y ciudades aledañas que se encuentran en pésimo estado debido a la gran cantidad de baches que "adornan" estos puntos. Es por ello que decidimos crear Bachenuncia, un portal de denuncias colectivas, dónde cada ciudadano tendrá la libertad de realizar su aporte.</p>
-    </div>
-  </div>
-</div>
-
-<!-- seccion informate -->
-
-<div class="relative bg-gray-900" id="estadisticas">
-  <div class="h-80 w-full absolute bottom-0 xl:inset-0 xl:h-full">
-    <div class="h-full w-full xl:grid xl:grid-cols-2">
-      <div class="h-full xl:relative xl:col-start-2">
-        <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="{{ url_for('static', filename='baches2.jpeg') }}" alt="Baches en paraguay">
-        <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"></div>
+    <div class="bg-white" id="porque">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+          ></h2>
+          <p
+            class="mt-1 text-4xl font-extrabold text-blue-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+          >
+            ¿Por qué lo hacemos?
+          </p>
+          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+            Como ciudadanos estamos al tanto del calamitoso estado de varias
+            calles de nuestro país, en este caso enfocandonos en los baches que
+            no son solucionados por parte de los municipios, son varias las
+            calles de la capital y ciudades aledañas que se encuentran en pésimo
+            estado debido a la gran cantidad de baches que "adornan" estos
+            puntos. Es por ello que decidimos crear Bachenuncia, un portal de
+            denuncias colectivas, dónde cada ciudadano tendrá la libertad de
+            realizar su aporte.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8">
-    <div class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24">
-      <h2 class="text-sm font-semibold text-blue-900 tracking-wide uppercase">¡Informate!</h2>
-      <p class="mt-3 text-3xl font-extrabold text-white">¿Qué es un bache?</p>
-      <p class="mt-5 text-lg text-white">Los baches son fallas localizadas en la superficie del pavimento, cuya longitud mínima es de 15 centímetros. Dicho en otras palabras, un bache es una porción del asfalto que ha sido removida y colocada con o sin material adicional después de la construcción original del pavimento.En general, los baches se clasifican por su severidad (profundidad), la cual puede ser baja, media y alta. Vale la pena mencionar que la profundidad de un bache es aquella por debajo de la superficie del pavimento, y ésta tiene que ser determinada por una inspección previa en el tramo donde se desarrolló la falla. 
-      </p>
-      <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
-        <p>
-          <span class="block text-3xl font-bold text-white">¿Cómo se forman los baches?</span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Los baches</span> se pueden formar por diferentes causas, pero destacan las siguientes:
-          - Carpetas de mala calidad
-          - Capas de base de baja calidad o espesor insuficiente
-          - Humedad excesiva en el pavimento por lluvia y/o drenajes insuficientes
-          - Desgranamiento superficial</span>
+
+    <!-- seccion informate -->
+
+    <div class="relative bg-gray-900" id="info">
+      <div class="h-80 w-full absolute bottom-0 xl:inset-0 xl:h-full">
+        <div class="h-full w-full xl:grid xl:grid-cols-2">
+          <div class="h-full xl:relative xl:col-start-2">
+            <img
+              class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0"
+              src="{{ url_for('static', filename='baches2.jpeg') }}"
+              alt="Baches en paraguay"
+            />
+            <div
+              aria-hidden="true"
+              class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8"
+      >
+        <div
+          class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24"
+        >
+          <h2
+            class="text-sm font-semibold text-indigo-300 tracking-wide uppercase"
+          >
+            ¡Informate!
+          </h2>
+          <p class="mt-3 text-3xl font-extrabold text-white">
+            ¿Qué es un bache?
+          </p>
+          <p class="mt-5 text-lg text-white">
+            Los baches son fallas localizadas en la superficie del pavimento,
+            cuya longitud mínima es de 15 centímetros. Dicho en otras palabras,
+            un bache es una porción del asfalto que ha sido removida y colocada
+            con o sin material adicional después de la construcción original del
+            pavimento.En general, los baches se clasifican por su severidad
+            (profundidad), la cual puede ser baja, media y alta. Vale la pena
+            mencionar que la profundidad de un bache es aquella por debajo de la
+            superficie del pavimento, y ésta tiene que ser determinada por una
+            inspección previa en el tramo donde se desarrolló la falla.
+          </p>
+          <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
+            <p>
+              <span class="block text-3xl font-bold text-white"
+                >¿Cómo se forman los baches?</span
+              >
+              <span class="mt-1 block text-base text-gray-300"
+                ><span class="font-medium text-white">Los baches</span> se
+                pueden formar por diferentes causas, pero destacan las
+                siguientes: - Carpetas de mala calidad - Capas de base de baja
+                calidad o espesor insuficiente - Humedad excesiva en el
+                pavimento por lluvia y/o drenajes insuficientes - Desgranamiento
+                superficial</span
+              >
+            </p>
+
+            <p>
+              <span class="block text-3xl font-bold text-white"
+                >Formas actuales de realizar tus denuncias:</span
+              >
+              <span class="mt-1 block text-base text-gray-300"
+                ><span class="font-medium text-white"></span>Algunos municipios
+                cuentan con líneas de atención al ciudadano para realizar sus
+                reclamos de todo tipo, incluso otros con portales web que
+                actualmente están en funcionamiento pero aun así no intervienen
+                en dichos casos para resolverlos.
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Footer -->
+
+    <footer class="bg-white">
+      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav
+          class="-mx-5 -my-2 flex flex-wrap justify-center"
+          aria-label="Footer"
+        >
+          <div class="px-5 py-2">
+            <a
+              href="#denuncia"
+              class="text-base text-gray-500 hover:text-gray-900"
+              >Denunciá</a
+            >
+          </div>
+
+          <div class="px-5 py-2">
+            <a href="#mapa" class="text-base text-gray-500 hover:text-gray-900"
+              >Ubicaciones
+            </a>
+          </div>
+
+          <div class="px-5 py-2">
+            <a
+              href="#estadisticas"
+              class="text-base text-gray-500 hover:text-gray-900"
+            >
+              Estadísticas
+            </a>
+          </div>
+
+          <div class="px-5 py-2">
+            <a
+              href="#conocenos"
+              class="text-base text-gray-500 hover:text-gray-900"
+            >
+              Conocenos
+            </a>
+          </div>
+
+          <div class="px-5 py-2">
+            <a
+              href="#porque"
+              class="text-base text-gray-500 hover:text-gray-900"
+              >¿Por qué lo hacemos?
+            </a>
+          </div>
+
+          <div class="px-5 py-2">
+            <a href="#info" class="text-base text-gray-500 hover:text-gray-900"
+              >Informate
+            </a>
+          </div>
+        </nav>
+        <p class="mt-8 text-center text-base text-gray-400">
+          &copy; 2022 Grupoguayos. Paraguay. All rights reserved.
         </p>
-
-        <!-- <p>
-          <span class="block text-3xl font-bold text-white"></span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Retomando</span> el listado anterior, el agua es uno de los factores más recurrentes para la formación de baches. Esto sucede de la siguiente manera: el agua entra por la carpeta asfáltica y penetra por la estructura del pavimento. Después se aloja en capas inferiores (hasta el grado de congelarse), y con el paso de los vehículos la superficie se va derrumbando creando el bache.La formación de baches a consecuencia del exceso de agua es muy notoria al finalizar el invierno y a inicios de la primavera, esto debido a los ciclos anuales de hielo y deshielo. No obstante, la situación se vuelva crítica durante la temporada de lluvia pues los niveles de líquido en el asfalto aumentan significativamente.</span>
-        </p> -->
-
-        <p>
-          <span class="block text-3xl font-bold text-white">Formas actuales de realizar tus denuncias:</span>
-          <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white"></span>Algunos municipios cuentan con líneas de atención al ciudadano para realizar sus reclamos de todo tipo, incluso otros con portales web que actualmente están en funcionamiento pero aun así no intervienen en dichos casos para resolverlos. </span>
-        </p>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Section Footer -->
-
-<footer class="bg-white">
-  <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-    <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
-      <div class="px-5 py-2">
-        <a href="#denuncia" class="text-base text-gray-500 hover:text-gray-900">Denunciá</a>
-      </div>
-
-      <div class="px-5 py-2">
-        <a href="#ubicaciones" class="text-base text-gray-500 hover:text-gray-900">Ubicaciones </a>
-      </div>
-
-      <div class="px-5 py-2">
-        <a href="#estadisticas" class="text-base text-gray-500 hover:text-gray-900"> Estadísticas </a>
-      </div>
-
-      <div class="px-5 py-2">
-        <a href="#conocenos" class="text-base text-gray-500 hover:text-gray-900"> Conocenos </a>
-      </div>
-
-      <div class="px-5 py-2">
-        <a href="#¿Por que lo hacemos?" class="text-base text-gray-500 hover:text-gray-900">¿Por qué lo hacemos? </as>
-      </div>
-
-    </nav>
-    <p class="mt-8 text-center text-base text-gray-400">&copy; 2022 Grupoguayos. Paraguay. All rights reserved.</p>
-  </div>
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>
