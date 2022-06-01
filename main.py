@@ -1,5 +1,4 @@
 import base64
-import imp
 from flask import Flask, jsonify, request,  render_template
 from config import config
 from models import db, Bache
