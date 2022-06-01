@@ -202,7 +202,7 @@ css"
         <label
           for="nombre_bache"
           class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
-          >Nickname</label
+          >Ponele un nombre a tu bache</label
         >
         <input
           type="text"
@@ -221,12 +221,11 @@ css"
           class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
           >Latitud</label
         >
-        <span
+        <input
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           id="latitud"
           name="latitud"
         >
-        </span>
       </div>
 
       <div
@@ -237,12 +236,11 @@ css"
           class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
           >Longitud</label
         >
-        <span
+        <input
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           id="longitud"
           name="longitud"
         >
-        </span>
       </div>
 
       <!-- boton Guardar -->
@@ -616,11 +614,11 @@ css"
       var ubi = [];
       let listOfMarkers = [];
 
-      setInterval(loadPositions, 10000);
+      loadPositions();
 
       if ("geolocation" in navigator) {
         console.log("location is available");
-        setInterval(searchPosition, 10000);
+        searchPosition();
       } else {
         console.log("geolocation is not available");
       }
@@ -641,8 +639,8 @@ css"
         navigator.geolocation.getCurrentPosition(async (position) => {
           var lat = position.coords.latitude;
           var lon = position.coords.longitude;
-          document.getElementById("latitud").textContent = lat;
-          document.getElementById("longitud").textContent = lon;
+          document.getElementById("latitud").value = lat;
+          document.getElementById("longitud").value = lon;
           const data = { uuid, lat, lon };
           const options = {
             method: "POST",

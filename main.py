@@ -1,5 +1,6 @@
 import base64
 from flask import Flask, jsonify, request,  render_template, send_file
+from sqlalchemy import true
 from config import config
 from models import db, Bache
 import folium
@@ -79,13 +80,13 @@ def mapa():
     #Inicializamos el mapa 
     map= folium.Map(
         location=[-25.302058396540463, -57.58112871603071],
-        zoom_start=13,
+        zoom_start=9,
         )
     cluster= MarkerCluster().add_to(map)
     lista_baches =Bache.query.all()
     extraccion = []
     for datos in lista_baches:
-        extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache, datos.foto])
+        extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache, datos.foto, datos.categoria])
 
     for point in extraccion:
         mark= point[0],point[1]
@@ -97,11 +98,23 @@ def mapa():
         #print(foto)
         #print(foto)
         iframe= IFrame(html(encoded.decode()),width=360,height=240)
-        folium.Marker(
+        categoria= point[4]
+        print(categoria)
+        validacion_agua= categoria=="Aquabache" or categoria =="Bachemar" or categoria== "Aquabache" or categoria== "Bachelor" or categoria =="Bacheton" 
+        validacion_tierra= categoria== "Bachardo" or categoria== "Bacheto" or categoria=="Bacheinfierno" or categoria== "Bachenato" or categoria== "Bachero"
+        if validacion_agua:
+            folium.Marker(
             location=mark,
             popup=folium.Popup(iframe),
+            icon=folium.Icon(color="blue"),
+            tooltip=point[2]).add_to(cluster)
+        elif validacion_tierra:
+            folium.Marker(
+            location=mark,
+            popup=folium.Popup(iframe),
+            icon=folium.Icon(color="red"),
             tooltip=point[2]
-        ).add_to(cluster)
+            ).add_to(cluster)
     return map._repr_html_()
 
 def to_dict(row):
@@ -127,3 +140,6 @@ def exportexcel():
     writer.save()
 
     return send_file(filename)
+
+if __name__== '__main__':
+    app.run(debug= true)
