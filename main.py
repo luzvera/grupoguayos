@@ -1,10 +1,11 @@
 import base64
-from flask import Flask, jsonify, request,  render_template
+from flask import Flask, jsonify, request,  render_template, send_file
 from config import config
 from models import db, Bache
 import folium
 from folium import IFrame
 from folium.plugins import MarkerCluster
+import pandas as pd
 
 def create_app(enviroment):
     app = Flask(__name__)
@@ -103,3 +104,26 @@ def mapa():
         ).add_to(cluster)
     return map._repr_html_()
 
+def to_dict(row):
+    if row is None:
+        return None
+
+    rtn_dict = dict()
+    keys = row.__table__.columns.keys()
+    for key in keys:
+        rtn_dict[key] = getattr(row, key)
+    return rtn_dict
+
+@app.route('/excel', methods=['GET', 'POST'])
+def exportexcel():
+    data = Bache.query.all()
+    data_list = [to_dict(item) for item in data]
+    df = pd.DataFrame(data_list)
+    filename = "extraccion.xlsx"
+    print("Archivo: "+filename)
+
+    writer = pd.ExcelWriter(filename)
+    df.to_excel(writer, sheet_name='PalaEssap')
+    writer.save()
+
+    return send_file(filename)
