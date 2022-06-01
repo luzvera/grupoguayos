@@ -1,4 +1,5 @@
 import base64
+from turtle import width
 from flask import Flask, jsonify, request,  render_template, send_file
 from sqlalchemy import true
 from config import config
@@ -7,6 +8,7 @@ import folium
 from folium import IFrame
 from folium.plugins import MarkerCluster
 import pandas as pd
+from PIL import Image
 
 def create_app(enviroment):
     app = Flask(__name__)
@@ -61,8 +63,15 @@ def create_bache():
     )
     file = request.files['foto']
     file.save(f"static/baches/{file.filename}")
+    image = Image.open(f"static/baches/{file.filename}")
+    width, height = image.size
+    new_width = width//3
+    new_height = height//3
+    resized_image = image.resize((new_width, new_height), Image.BICUBIC)
+    resized_image.save(f"static/baches/resized/{file.filename}")
+    print(resized_image)
 
-    return render_template('index.html', bache= bache)
+    return redirect ('index.html', bache= bache)
 
 # Borrar un bache
 @app.route('/api/v1/baches/<id>', methods=['DELETE'])
@@ -87,12 +96,13 @@ def mapa():
     extraccion = []
     for datos in lista_baches:
         extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache, datos.foto, datos.categoria])
+# mapa de datos
 
     for point in extraccion:
         mark= point[0],point[1]
         #print(point)
         # # point(i)
-        foto= f"static/baches/{point[3]}"
+        foto= f"static/baches/resized/{point[3]}"
         html = '<img width="360px" src="data:image/jpeg;base64,{}">'.format
         encoded = base64.b64encode(open(foto, 'rb').read())
         #print(foto)
@@ -100,7 +110,7 @@ def mapa():
         iframe= IFrame(html(encoded.decode()),width=360,height=240)
         categoria= point[4]
         print(categoria)
-        validacion_agua= categoria=="Aquabache" or categoria =="Bachemar" or categoria== "Aquabache" or categoria== "Bachelor" or categoria =="Bacheton" 
+        validacion_agua= categoria=="Bachecito" or categoria =="Bachemar" or categoria== "Aquabache" or categoria== "Bachelor" or categoria =="Bacheton" 
         validacion_tierra= categoria== "Bachardo" or categoria== "Bacheto" or categoria=="Bacheinfierno" or categoria== "Bachenato" or categoria== "Bachero"
         if validacion_agua:
             folium.Marker(

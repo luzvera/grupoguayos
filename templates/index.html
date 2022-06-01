@@ -21,7 +21,7 @@ css"
         display: none;
       }
 
-      /* Hide scrollbar for IE, Edge and Firefox */
+      /* esconder scroll de la web */
       body {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
@@ -37,7 +37,7 @@ css"
       >
         <div class="w-full py-6 sm:py-0 flex items-center justify-between">
           <div class="flex items-center mx-auto sm:ml-0">
-            <a href="#">
+            <a href="{{url_for('index')}}">
               <span class="sr-only">Workflow</span>
               <img
                 class="h-24 w-auto"
@@ -225,7 +225,7 @@ css"
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           id="latitud"
           name="latitud"
-        >
+        />
       </div>
 
       <div
@@ -240,7 +240,7 @@ css"
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           id="longitud"
           name="longitud"
-        >
+        />
       </div>
 
       <!-- boton Guardar -->
