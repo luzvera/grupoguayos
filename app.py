@@ -1,5 +1,4 @@
 import base64
-from turtle import width
 from flask import Flask, jsonify, request,  render_template, send_file
 from sqlalchemy import true
 from config import config
