@@ -1,3 +1,4 @@
+import base64
 import imp
 from flask import Flask, jsonify, request,  render_template
 from config import config
@@ -80,11 +81,15 @@ def mapa():
         mark= point[0],point[1]
         #print(point)
         # # point(i)
-        foto= point[3]
+        foto= f"static/baches/{point[3]}"
+        html = '<img src="data:image/jpg;base64,{}">'.format
+        encoded = base64.b64encode(open(foto, 'rb').read())
         #print(foto)
+        #print(foto)
+        iframe= IFrame(html(encoded),width=120,height=120)
         folium.Marker(
             location=mark,
-            popup=f"<b>{point[3]}</b>",
+            popup=folium.Popup(iframe),
             tooltip="bache!"
         ).add_to(cluster)
     return map._repr_html_()
