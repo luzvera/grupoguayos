@@ -87,7 +87,7 @@ def delete_bache(id):
 def mapa():
     #Inicializamos el mapa 
     map= folium.Map(
-        location=[-25.284065048263923, -57.61851031230153],
+        location=[-25.360106678758992, -57.63123446013285],
         zoom_start=13,
         )
     cluster= MarkerCluster().add_to(map)
