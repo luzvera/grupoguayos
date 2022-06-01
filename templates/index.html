@@ -221,13 +221,12 @@ css"
           class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
           >Latitud</label
         >
-        <input
-          type="text"
-          name="latitud"
-          id="latitud"
+        <span
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-          placeholder="Datos de latitud"
-        />
+          id="latitud"
+          name="latitud"
+        >
+        </span>
       </div>
 
       <div
@@ -238,13 +237,12 @@ css"
           class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-blue-900"
           >Longitud</label
         >
-        <input
-          type="text"
-          name="longitud"
-          id="longitud"
+        <span
           class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-          placeholder="Datos de longitud"
-        />
+          id="longitud"
+          name="longitud"
+        >
+        </span>
       </div>
 
       <!-- boton Guardar -->
@@ -611,5 +609,51 @@ css"
         </p>
       </div>
     </footer>
+
+    <script>
+      let DB = [];
+      let uuid = Math.random().toString();
+      var ubi = [];
+      let listOfMarkers = [];
+
+      setInterval(loadPositions, 10000);
+
+      if ("geolocation" in navigator) {
+        console.log("location is available");
+        setInterval(searchPosition, 10000);
+      } else {
+        console.log("geolocation is not available");
+      }
+
+      async function loadPositions() {
+        const response = await fetch("/nueva");
+        const locations = await response.json();
+
+        listOfMarkers.forEach(removeMarker);
+        function removeMarker(marker) {
+          map.removeLayer(marker);
+        }
+
+        listOfMarkers = [];
+      }
+
+      function searchPosition() {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+          document.getElementById("latitud").textContent = lat;
+          document.getElementById("longitud").textContent = lon;
+          const data = { uuid, lat, lon };
+          const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          };
+          fetch("/nueva", options);
+        });
+      }
+    </script>
   </body>
 </html>
