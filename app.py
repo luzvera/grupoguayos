@@ -60,17 +60,17 @@ def create_bache():
         nombre_bache=body_diccionario['nombre_bache'], 
         nombre_usuario=body_diccionario['nombre_usuario'],
     )
-    file = request.files['foto']
-    file.save(f"static/baches/{file.filename}")
-    image = Image.open(f"static/baches/{file.filename}")
-    width, height = image.size
-    new_width = width//3
-    new_height = height//3
-    resized_image = image.resize((new_width, new_height), Image.BICUBIC)
-    resized_image.save(f"static/baches/resized/{file.filename}")
-    print(resized_image)
+    file = request.files['foto'] # Obtiene la foto
+    file.save(f"static/baches/{file.filename}") # Guarda la foto original
+    image = Image.open(f"static/baches/{file.filename}") #Una vez guardada la foto original lo abre
+    width, height = image.size #Mide las dimensiones
+    new_width = width//3 #Divide el ancho
+    new_height = height//3 #Divide el alto
+    resized_image = image.resize((new_width, new_height), Image.BICUBIC) #Comprime la imagen
+    resized_image.save(f"static/baches/resized/{file.filename}") #Lo guarda en una base de datos
+    #print(resized_image)
 
-    return redirect ('index.html', bache= bache)
+    return render_template('index.html', bache= bache)
 
 # Borrar un bache
 @app.route('/api/v1/baches/<id>', methods=['DELETE'])
