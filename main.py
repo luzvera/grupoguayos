@@ -1,7 +1,9 @@
+import imp
 from flask import Flask, jsonify, request,  render_template
 from config import config
 from models import db, Bache
 import folium
+from folium import IFrame
 from folium.plugins import MarkerCluster
 
 def create_app(enviroment):
@@ -72,15 +74,17 @@ def mapa():
     lista_baches =Bache.query.all()
     extraccion = []
     for datos in lista_baches:
-        extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache])
+        extraccion.append([datos.latitud, datos.longitud, datos.nombre_bache, datos.foto])
 
     for point in extraccion:
         mark= point[0],point[1]
-        print(point)
+        #print(point)
         # # point(i)
+        foto= point[3]
+        #print(foto)
         folium.Marker(
             location=mark,
-            popup=f">b<{point[2]}</b>",
+            popup=f"<b>{point[3]}</b>",
             tooltip="bache!"
         ).add_to(cluster)
     return map._repr_html_()
