@@ -17,8 +17,8 @@ class Bache(db.Model):
     nombre_usuario = db.Column(db.String(50), nullable=False)
 
     @classmethod
-    def create(cls, nombre_bache, direccion, categoria, latitud, longitud, nombre_usuario):
-            user = Bache(nombre_bache=nombre_bache, direccion=direccion, categoria=categoria, latitud=latitud, longitud=longitud, nombre_usuario=nombre_usuario)
+    def create(cls, nombre_bache, direccion, foto, categoria, latitud, longitud, nombre_usuario):
+            user = Bache(nombre_bache=nombre_bache, direccion=direccion, foto=foto, categoria=categoria, latitud=latitud, longitud=longitud, nombre_usuario=nombre_usuario)
             return user.save()
 
     def save(self):

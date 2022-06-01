@@ -48,7 +48,17 @@ def get_bache(id):
 def create_bache():
     body_diccionario = request.form
 
-    bache = Bache.create(direccion=body_diccionario['direccion'], categoria=body_diccionario['categoria'], latitud=body_diccionario['latitud'], longitud=body_diccionario['longitud'], nombre_bache=body_diccionario['nombre_bache'], nombre_usuario=body_diccionario['nombre_usuario'])
+    bache = Bache.create(
+        direccion=body_diccionario['direccion'], 
+        foto=request.files['foto'].filename,
+        categoria=body_diccionario['categoria'], 
+        latitud=body_diccionario['latitud'], 
+        longitud=body_diccionario['longitud'], 
+        nombre_bache=body_diccionario['nombre_bache'], 
+        nombre_usuario=body_diccionario['nombre_usuario'],
+    )
+    file = request.files['foto']
+    file.save(f"static/baches/{file.filename}")
 
     return render_template('index.html', bache= bache)
 
@@ -81,11 +91,11 @@ def mapa():
         #print(point)
         # # point(i)
         foto= f"static/baches/{point[3]}"
-        html = '<img src="data:image/jpg;base64,{}">'.format
+        html = '<img width="360px" src="data:image/jpeg;base64,{}">'.format
         encoded = base64.b64encode(open(foto, 'rb').read())
         #print(foto)
         #print(foto)
-        iframe= IFrame(html(encoded),width=120,height=120)
+        iframe= IFrame(html(encoded.decode()),width=360,height=240)
         folium.Marker(
             location=mark,
             popup=folium.Popup(iframe),
